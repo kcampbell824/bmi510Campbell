@@ -2,7 +2,7 @@
 % Please edit documentation in R/final_functions.R
 \name{logLikBernoulli}
 \alias{logLikBernoulli}
-\title{Given a binary vector, identifies the parameter p that maximizes Bernoulli log-likelihood}
+\title{Bernoulli Maximum Log Likelihood Estimate}
 \usage{
 logLikBernoulli(data)
 }
