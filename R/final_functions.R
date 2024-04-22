@@ -1,3 +1,5 @@
+#' Bernoulli Maximum Log Likelihood Estimate
+#'
 #' Given a binary vector, identifies the parameter p that maximizes Bernoulli log-likelihood
 #'
 #' @param data Binary vector of observed data
