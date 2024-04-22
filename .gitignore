@@ -1,0 +1,3 @@
+# DOC: ignore any R workspace saved files
+.RData
+.Rhistory
