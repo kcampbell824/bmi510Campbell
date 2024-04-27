@@ -28,3 +28,13 @@ for(i in seq(1, length(p_s))){
   }
 }
 logLikBernoulli(x) == mle_p # Expect TRUE
+
+# Unscaling
+x = c(-1, -1.5, -2, 4, 3, 5)
+x1 = scale(x, center = TRUE, scale = FALSE)
+x2 = scale(x, center = FALSE, scale = TRUE)
+x3 = scale(x)
+
+all(unscale(x1) == x) # Expect TRUE
+all(unscale(x2) == x) # Expect TRUE
+all(unscale(x3) == x) # Expect TRUE

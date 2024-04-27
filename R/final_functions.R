@@ -31,3 +31,30 @@ logLikBernoulli <- function(data){
   }
   mle_p
 }
+
+#' Unscale data
+#'
+#' Given a set of data, x, that has previously been passed through the scale function,
+#' reverses centering and scaling as needed
+#'
+#' @param x dataset that may have been scaled
+#' @return data with any previous scaling reversed
+#' @examples
+#' x2 = c(-1, -1.5, -2, 4, 3, 5)
+#' x = scale(x, center = TRUE, scale = TRUE)
+#' unscale(x)
+#' @export
+unscale <- function(x){
+  
+  # Check attributes of input x to check for centering/scaling
+  scaled = attr(x, which = "scaled:scale")
+  centered = attr(x, which = "scaled:center")
+  if(!is.null(scaled)){
+    x = x*scaled
+  }
+  if(!is.null(centered)){
+    x = x + centered
+  }
+  x
+}
+
