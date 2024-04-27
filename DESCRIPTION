@@ -2,7 +2,7 @@ Package: bmi510Campbell
 Title: Kiersten Campbell's BMI 510 Final Project
 Version: 0.0.0.9000
 Authors@R: 
-    person("Kiersten", "Campbell", , "kscamp3@emory.edu", role = "aut""cre")
+    person("Kiersten", "Campbell", , "kscamp3@emory.edu", role = "aut")
 Description: This package includes several useful biostatistics-related functions.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
