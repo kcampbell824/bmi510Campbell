@@ -58,3 +58,41 @@ unscale <- function(x){
   x
 }
 
+#' Download RedCap report data
+#'
+#' Given a redCap URL and report ID, downloads the report data using the users' 
+#' RedCap API token specified in .Renviron under the key redcapTokenName
+#'
+#' @param redcapTokenName key in .Renviron file to find redCap API token
+#' @param redcapUrl URL to pull redCap data from
+#' @param redcapReportId ID of redCap report to pull data from
+#' @return tibble of data contained at the redCap URL under the specified report ID
+#' @examples
+#' url <- "https://redcap.test.edu/api/"
+#' reportId <- '12345'
+#' tokenName <- 'mySecretAPItoken'
+#' data = downloadRedcapReport(tokenName,url,reportId)
+#' @export
+downloadRedcapReport = function(redcapTokenName,redcapUrl,redcapReportId){
+  
+  # Pull API key from .Renviron (should be in project directory)
+  api.token = Sys.getenv(c(redcapTokenName))
+  if(api.token == ""){
+    stop("Make sure you place your RedCap API token in the .Renviron file using the correct key identifier!")
+  }
+  
+  # Adapted from provided example code
+  formData <- list("token"=api.token,
+                   content='report',
+                   format='csv',
+                   report_id=redcapReportId,
+                   csvDelimiter='',
+                   rawOrLabel='raw',
+                   rawOrLabelHeaders='raw',
+                   exportCheckboxLabel='false',
+                   returnFormat='csv'
+  )
+  response <- httr::POST(redcapUrl, body = formData, encode = "form")
+  result <- httr::content(response, show_col_types = FALSE)
+  result
+}
