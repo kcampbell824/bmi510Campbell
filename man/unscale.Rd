@@ -17,7 +17,7 @@ Given a set of data, x, that has previously been passed through the scale functi
 reverses centering and scaling as needed
 }
 \examples{
-x2 = c(-1, -1.5, -2, 4, 3, 5)
+x = c(-1, -1.5, -2, 4, 3, 5)
 x = scale(x, center = TRUE, scale = TRUE)
 unscale(x)
 }

@@ -40,7 +40,7 @@ logLikBernoulli <- function(data){
 #' @param x dataset that may have been scaled
 #' @return data with any previous scaling reversed
 #' @examples
-#' x2 = c(-1, -1.5, -2, 4, 3, 5)
+#' x = c(-1, -1.5, -2, 4, 3, 5)
 #' x = scale(x, center = TRUE, scale = TRUE)
 #' unscale(x)
 #' @export
