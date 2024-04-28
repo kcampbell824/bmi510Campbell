@@ -58,6 +58,32 @@ unscale <- function(x){
   x
 }
 
+#' PCA Approximation of original data
+#'
+#' Given a set of data, x, returns an approximation of the original data based on npc principal components
+#'
+#' @param x original dataset
+#' @param npc number of principal components to base the approximation of x on
+#' @return PCA approximation of x (rescaled and centered to match original dataset)
+#' @examples
+#' data = iris[1:4]
+#' pcApprox(data, npc = 2)
+#' @export
+pcApprox = function(x, npc){
+  if(npc > dim(x)[2]){
+    stop("Number of principal components cannot be greater than the number of columns in x!")
+  }
+  
+  all_pca = prcomp(x, center = TRUE, scale = TRUE, rank = npc)
+  means = all_pca$center
+  scale = all_pca$scale
+  
+  scores = all_pca$x
+  loadings = all_pca$rotation
+  approx = scores %*% t(loadings)
+  (approx * scale) + means
+}
+
 #' Standardize column names
 #'
 #' Given a tibble, data, standardizes all column names to be in small_camel format

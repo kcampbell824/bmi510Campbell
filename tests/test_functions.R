@@ -49,6 +49,23 @@ if(unscale1 && unscale2 && unscale3){
   print("Unscale Tests: Failed")
 }
 
+# PCA approximation
+data = iris[1:4]
+pca = prcomp(data, center = TRUE, scale = TRUE)
+approx2 = pca$x[,1:2] %*% t(pca$rotation[,1:2])
+approx2 = approx2 * pca$scale + pca$center
+approx2 = all(approx2 == pcApprox(data, 2))
+
+approx3 = pca$x[,1:3] %*% t(pca$rotation[,1:3])
+approx3 = approx3 * pca$scale + pca$center
+approx3 = all(approx3 == pcApprox(data, 3))
+
+if(approx2 && approx3){
+  print("PCA Approximation Tests: Pass")
+} else{
+  print("PCA Approximation Tests: Failed")
+}
+
 # Standardize Names
 test_tibble = tibble::tibble(x = seq(1, 10, 1), y = x * 2)
 names(test_tibble) = c("First 10 Numbers", "$$Squared$$$values")
