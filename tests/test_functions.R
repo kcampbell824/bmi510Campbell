@@ -52,8 +52,8 @@ if(unscale1 && unscale2 && unscale3){
 # Standardize Names
 test_tibble = tibble::tibble(x = seq(1, 10, 1), y = x * 2)
 names(test_tibble) = c("First 10 Numbers", "$$Squared$$$values")
-test_tibble = standardizeNames(test_tibble)
-if(names(test_tibble) = c("first10Numbers", "squaredValues")){
+test_tibble = bmi510Campbell::standardizeNames(test_tibble)
+if(all(names(test_tibble) == c("first10Numbers", "squaredValues"))){
   print("Standardize Names Tests: Pass")
 } else{
   print("Standardize Names Tests: Failed")
