@@ -58,6 +58,21 @@ unscale <- function(x){
   x
 }
 
+#' Standardize column names
+#'
+#' Given a tibble, data, standardizes all column names to be in small_camel format
+#'
+#' @param data tibble of data with column names to standardize
+#' @return data with variable names standardized to small_camel format
+#' @examples
+#' test_tibble = tibble::tibble(x = seq(1, 10, 1), y = x * 2)
+#' names(test_tibble) = c("First 10 Numbers", "$$Squared$$$values")
+#' test_tibble = standardizeNames(test_tibble)
+#' @export
+standardizeNames = function(data){
+  data |> dplyr::rename_with(janitor::make_clean_names, case = "small_camel")
+}
+
 #' Download RedCap report data
 #'
 #' Given a redCap URL and report ID, downloads the report data using the users' 

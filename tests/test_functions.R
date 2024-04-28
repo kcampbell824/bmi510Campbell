@@ -9,7 +9,7 @@ devtools::install_git("https://github.com/kcampbell824/bmi510Campbell", branch =
 true_p = 0.62
 x = rbinom(100, 1, true_p)
 obs_p = sum(x)/length(x)
-print(logLikBernoulli(x) == obs_p) # Expect TRUE
+log_lik1 = bmi510Campbell::logLikBernoulli(x) == obs_p # Expect TRUE
 
 # Compare to using dbinom for grid search
 p_s = seq(0, 1, 0.001)
@@ -27,7 +27,12 @@ for(i in seq(1, length(p_s))){
     mle_p = p_s[i]
   }
 }
-print(logLikBernoulli(x)) == mle_p # Expect TRUE
+log_lik2 = bmi510Campbell::logLikBernoulli(x) == mle_p # Expect TRUE
+if(log_lik1 && log_lik2){
+  print("Bernoulli Log Likelihood Tests: Pass")
+} else{
+  print("Bernoulli Log Likelihood Tests: Failed")
+}
 
 # Unscaling
 x = c(-1, -1.5, -2, 4, 3, 5)
@@ -35,14 +40,35 @@ x1 = scale(x, center = TRUE, scale = FALSE)
 x2 = scale(x, center = FALSE, scale = TRUE)
 x3 = scale(x)
 
-print(all(unscale(x1) == x)) # Expect TRUE
-print(all(unscale(x2) == x)) # Expect TRUE
-print(all(unscale(x3) == x)) # Expect TRUE
+unscale1 = all(bmi510Campbell::unscale(x1) == x) # Expect TRUE
+unscale2 = all(bmi510Campbell::unscale(x2) == x) # Expect TRUE
+unscale3 = all(bmi510Campbell::unscale(x3) == x) # Expect TRUE
+if(unscale1 && unscale2 && unscale3){
+  print("Unscale Tests: Pass")
+} else{
+  print("Unscale Tests: Failed")
+}
+
+# Standardize Names
+test_tibble = tibble::tibble(x = seq(1, 10, 1), y = x * 2)
+names(test_tibble) = c("First 10 Numbers", "$$Squared$$$values")
+test_tibble = standardizeNames(test_tibble)
+if(names(test_tibble) = c("first10Numbers", "squaredValues")){
+  print("Standardize Names Tests: Pass")
+} else{
+  print("Standardize Names Tests: Failed")
+}
 
 # Download RedCap report
 url <- "https://redcap.emory.edu/api/"
 reportId <- '46524'
 tokenName <- 'redCapAPIkey'
-data = downloadRedcapReport(tokenName,url,reportId)
-print(all(dim(data) == c(91,7))) # Expect TRUE
-print(all(colnames(data) == c("record_id","code","visit_number","muscle","mv","arm","condition"))) # Expect TRUE
+data = bmi510Campbell::downloadRedcapReport(tokenName,url,reportId)
+download1 = all(dim(data) == c(91,7)) # Expect TRUE
+download2 = all(colnames(data) == c("record_id","code","visit_number","muscle","mv","arm","condition")) # Expect TRUE
+
+if(download1 && download2){
+  print("RedCap Download Tests: Pass")
+} else{
+  print("RedCap Download Tests: Failed")
+}
