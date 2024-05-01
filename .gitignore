@@ -4,3 +4,6 @@
 
 # DOC: ignore REnviron file, which will contain API tokens
 .Renviron
+
+# DOC: local macOS files
+.DS_Store
