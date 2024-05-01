@@ -142,9 +142,7 @@ standardizeNames = function(data){
 #' Find minimum sample size
 #'
 #' Given 1 sample, x1, find the minimum sample size to determine if the mean of x1 differs from 
-#' 0 with 80% power with alpha = 0.05 
-#' 
-#' Given 2 samples, x1 and x2, finds the minimum sample sizes to test if the means differ
+#' 0 with 80% power with alpha = 0.05. Given 2 samples, x1 and x2, finds the minimum sample sizes to test if the means differ
 #'
 #' @param x1 one sample of data (required)
 #' @param x2 second sample of data (option)

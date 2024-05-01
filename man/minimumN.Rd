@@ -16,10 +16,7 @@ minimum sample size for one-sample or two-sample t-test
 }
 \description{
 Given 1 sample, x1, find the minimum sample size to determine if the mean of x1 differs from
-0 with 80\% power with alpha = 0.05
-}
-\details{
-Given 2 samples, x1 and x2, finds the minimum sample sizes to test if the means differ
+0 with 80\% power with alpha = 0.05. Given 2 samples, x1 and x2, finds the minimum sample sizes to test if the means differ
 }
 \examples{
 # One-sample t-test example
