@@ -5,7 +5,7 @@ Spring 2024
 ### Installation Guide
 The contents of this directory are structured as an R package, which can easily be installed locally with the following command:
 
-`devtools::install_git("https://github.com/kcampbell824/bmi510Campbell")`
+`devtools::install_github("https://github.com/kcampbell824/bmi510Campbell")`
 
 ### Contents
 This package contains several useful functions for biostatistical analyses. The list of available functions, with short descriptions, are listed below, but the standard `?functionName` command can be used to access the manual page for each function:

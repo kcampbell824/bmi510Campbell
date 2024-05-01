@@ -3,7 +3,7 @@
 # Also includes accuracy/functionality tests for each function
 
 # Load package from git
-devtools::install_git("https://github.com/kcampbell824/bmi510Campbell", branch = "dev", force=TRUE)
+devtools::install_github("https://github.com/kcampbell824/bmi510Campbell")
 
 # Bernoulli log likelihood test
 true_p = 0.62
