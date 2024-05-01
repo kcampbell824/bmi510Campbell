@@ -139,6 +139,42 @@ standardizeNames = function(data){
   data |> dplyr::rename_with(janitor::make_clean_names, case = "small_camel")
 }
 
+#' Find minimum sample size
+#'
+#' Given 1 sample, x1, find the minimum sample size to determine if the mean of x1 differs from 
+#' 0 with 80% power with alpha = 0.05 
+#' 
+#' Given 2 samples, x1 and x2, finds the minimum sample sizes to test if the means differ
+#'
+#' @param x1 one sample of data (required)
+#' @param x2 second sample of data (option)
+#' @return minimum sample size for one-sample or two-sample t-test
+#' @examples
+#' # One-sample t-test example
+#' x1 = c(0, -1, -3, -6, 1, 2, -5)
+#' minimumN(x1)
+#' 
+#' # Two-sample t-test example
+#' x2 = c(10, 11, -1, 12, 0, 3, 15)
+#' minimumN(x1, x2)
+#' @export
+minimumN <- function(x1,x2=NULL){
+  if(is.null(x2)){
+    d = mean(x1)/sd(x1)
+    min.n = pwr::pwr.t.test(d=d, sig.level = 0.05, power = 0.8, type = "one.sample")$n
+  }
+  else{
+    sd1 = sd(x1)
+    sd2 = sd(x2)
+    x1_size = length(x1)
+    x2_size = length(x2)
+    pooled_sd = (sd1 * x1_size + sd2 *x2_size)/(x1_size + x2_size - 2)
+    d = (mean(x1)-mean(x2))/pooled_sd
+    min.n = pwr::pwr.t.test(d=d, sig.level = 0.05, power = 0.8, type = "two.sample")$n
+  }
+  ceiling(min.n)
+}
+
 #' Download RedCap report data
 #'
 #' Given a redCap URL and report ID, downloads the report data using the users' 
