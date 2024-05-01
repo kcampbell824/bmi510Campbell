@@ -85,6 +85,18 @@ if(all(names(test_tibble) == c("first10Numbers", "squaredValues"))){
   print("Standardize Names Tests: Failed")
 }
 
+# minimumN
+x1 = c(0, -1, -3, -6, 1, 2, -5)
+res1 = 27 == bmi510Campbell::minimumN(x1)
+
+x2 = c(10, 11, -1, 12, 0, 3, 15)
+res2 = 8 == bmi510Campbell::minimumN(x1, x2)
+if(res1 && res2){
+  print("MinimumN Tests: Pass")
+}else{
+  print("MinimumN Tests: Failed")
+}
+
 # Download RedCap report
 url <- "https://redcap.emory.edu/api/"
 reportId <- '46524'
