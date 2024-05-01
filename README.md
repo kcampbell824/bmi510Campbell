@@ -15,7 +15,7 @@ This package contains several useful functions for biostatistical analyses. The 
 - unscale(x) : reverses any centering and/or scaling
 - pcApprox(x, npc) : returns a PCA-approximation of the original data based on npc principal components
 - standardizeNames(data) : standardizes all column names in a tibble to camel case
-- minimumN(x1, x2=NULL) : finds the minimum sample size for desired effect size with 80% power and alpha = 0.5
+- minimumN(x1, x2=NULL) : finds the minimum sample size for desired effect size with 80% power and alpha = 0.05
 - downloadRedcapReport(redcapTokenName, redcapURL, redcapReportID) : using user's RedCap API token, downloads a report at designated redcap URL
 
 ### Examples/testing
