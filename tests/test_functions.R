@@ -34,6 +34,15 @@ if(log_lik1 && log_lik2){
   print("Bernoulli Log Likelihood Tests: Failed")
 }
 
+# Survival Curve
+dir = tempdir()
+tmpfile = tempfile(tmpdir = tempdir())
+download.file(url = 'https://jlucasmckay.bmi.emory.edu/global/bmi510/Labs-Materials/survival.csv', 
+              destfile = tmpfile, quiet = TRUE)
+
+survival = read.csv(tmpfile)
+survCurv(unlist(survival['status']), unlist(survival['time']))
+
 # Unscaling
 x = c(-1, -1.5, -2, 4, 3, 5)
 x1 = scale(x, center = TRUE, scale = FALSE)
@@ -54,11 +63,11 @@ data = iris[1:4]
 pca = prcomp(data, center = TRUE, scale = TRUE)
 approx2 = pca$x[,1:2] %*% t(pca$rotation[,1:2])
 approx2 = approx2 * pca$scale + pca$center
-approx2 = all(approx2 == pcApprox(data, 2))
+approx2 = all(approx2 == bmi510Campbell::pcApprox(data, 2))
 
 approx3 = pca$x[,1:3] %*% t(pca$rotation[,1:3])
 approx3 = approx3 * pca$scale + pca$center
-approx3 = all(approx3 == pcApprox(data, 3))
+approx3 = all(approx3 == bmi510Campbell::pcApprox(data, 3))
 
 if(approx2 && approx3){
   print("PCA Approximation Tests: Pass")

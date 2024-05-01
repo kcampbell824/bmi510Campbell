@@ -32,6 +32,46 @@ logLikBernoulli <- function(data){
   mle_p
 }
 
+#' Plot survival curve of time to event data
+#'
+#' Given a set of events, status, with 1 corresponding to the event and 0 corresponding to a censored patient,
+#' and the corresponding event times, time, plots a survival curve
+#'
+#' @param status set of events (0/1 valued)
+#' @param time time of each event
+#' @return ggplot object containing the survival curve
+#' @examples
+#' events = c(1,1,0,0,1,1,1,0,1,0)
+#' year = c(2,3,4,5,7,9,9,10,12,15)
+#' survCurv(events, year)
+#' @export
+survCurv <- function(status,time){
+  data = data.frame(status = status, time = time)
+  # sort data frame by ascending time
+  data = data[order(data$time), ]
+  
+  grouped_events = data |> 
+    dplyr::group_by(time) |> 
+    dplyr::summarize(n.events = sum(status), n.censored = sum(status == 0), n.tot = dplyr::n()) |> 
+    dplyr::ungroup()
+  
+  # product limit approach
+  total = length(status)
+  n.at.risk = c(total)
+  survival = c((n.at.risk[1] - grouped_events[1, "n.events"])/n.at.risk[1])
+  for(i in seq(2, nrow(grouped_events), 1)){
+    n.at.risk[i] = total - sum(grouped_events[1:i-1, "n.tot"])
+    survival[i] = survival[i-1] * ((n.at.risk[i] - grouped_events[i, "n.events"])/n.at.risk[i])
+  }
+  grouped_events = grouped_events |> 
+    dplyr::mutate(n.at.risk = n.at.risk) |> 
+    dplyr::mutate(survival = unname(unlist(survival)))
+  
+  ggplot2::ggplot(grouped_events, ggplot2::aes(time, survival)) +
+    ggplot2::geom_step()
+  
+}
+
 #' Unscale data
 #'
 #' Given a set of data, x, that has previously been passed through the scale function,
