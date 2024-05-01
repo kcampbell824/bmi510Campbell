@@ -1,10 +1,9 @@
 Package: bmi510Campbell
-Title: What the Package Does (One Line, Title Case)
+Title: Kiersten Campbell's BMI 510 Final Project
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    person("Kiersten", "Campbell", , "kscamp3@emory.edu", role = c("aut", "cre"))
+Description: This package includes several useful biostatistics-related functions.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8

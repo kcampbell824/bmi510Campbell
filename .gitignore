@@ -1,3 +1,9 @@
 # DOC: ignore any R workspace saved files
 .RData
 .Rhistory
+
+# DOC: ignore REnviron file, which will contain API tokens
+.Renviron
+
+# DOC: local macOS files
+.DS_Store
