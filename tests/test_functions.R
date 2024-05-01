@@ -3,7 +3,7 @@
 # Also includes accuracy/functionality tests for each function
 
 # Load package from git
-devtools::install_git("https://github.com/kcampbell824/bmi510Campbell", branch = "dev")
+devtools::install_git("https://github.com/kcampbell824/bmi510Campbell", branch = "dev", force=TRUE)
 
 # Bernoulli log likelihood test
 true_p = 0.62
@@ -41,7 +41,7 @@ download.file(url = 'https://jlucasmckay.bmi.emory.edu/global/bmi510/Labs-Materi
               destfile = tmpfile, quiet = TRUE)
 
 survival = read.csv(tmpfile)
-survCurv(unlist(survival['status']), unlist(survival['time']))
+bmi510Campbell::survCurv(unlist(survival['status']), unlist(survival['time']))
 
 # Unscaling
 x = c(-1, -1.5, -2, 4, 3, 5)
